@@ -1,0 +1,6 @@
+@DocMais_HostAddress = http://localhost:5239
+
+GET {{DocMais_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
