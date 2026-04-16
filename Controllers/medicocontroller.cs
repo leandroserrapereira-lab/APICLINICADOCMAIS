@@ -1,6 +1,7 @@
 ﻿using DocMais.MODEL;
 using DocMais.SERVICES;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography.X509Certificates;
 
 namespace DocMais.Controllers
 {
@@ -76,20 +77,12 @@ namespace DocMais.Controllers
                 return $"médico do crm n°{crm} editado com sucesso";
             }
 
-            [HttpGet("buscapaciente/{id}")]
-            public PacienteModel? buscarpacientes()
+
             {
-                foreach (var paciente in listaPaciente)
-                {
-                    if (paciente.nome == paciente.nome)
-                    {
-                        return paciente;
-
-                    }
-                }
-                return null;
             }
-           
+        } 
+    }
+}
 
 
 
@@ -105,5 +98,9 @@ namespace DocMais.Controllers
 
 
 
-        }
-}    
+
+
+
+
+
+
