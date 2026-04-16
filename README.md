@@ -1,81 +1,191 @@
- CLINICADOCMAIS API
- Introdução
- A **CLINICADOCMAIS API** é um sistema desenvolvido em **C# com ASP.NET Core** para gerenciamento de cadastros de pacientes. A aplicação utiliza **Entity Framework** para acesso a dados e **MySQL** como banco de dados.
-Tecnologias Utilizadas
-- ASP.NET Core 9
-- Entity Framework Core
-- MySQL
-- .NET CLI
-- Pré-requisitos
-Antes de começar, você precisará ter instalado em sua máquina:
+# 🏥 CLINICADOCMAIS API
 
-- [.NET SDK](https://dotnet.microsoft.com/)
-- MySQL Server
-- Git
+<p align="center">
+  <img src="https://img.shields.io/badge/.NET-9-blue?style=for-the-badge&logo=dotnet" />
+  <img src="https://img.shields.io/badge/ASP.NET-Core-purple?style=for-the-badge&logo=dotnet" />
+  <img src="https://img.shields.io/badge/Entity%20Framework-Core-green?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/MySQL-Database-orange?style=for-the-badge&logo=mysql" />
+</p>
 
-Verifique a instalação do .NET com:
-```bash
-dotnet --version
-dotnet --info
-A API permite:
-
-Cadastro de pacientes
-Consulta de pacientes
-Atualização de dados
-Remoção de registros
-
-Utilize ferramentas como:
-
-Postman
-Insomnia
-Swagger (se configurado
-A API estará disponível em:
-
-https://localhost:5001
-Controle de Versão (Git)
-Configuração inicial
-git config --global user.name "Seu Nome"
-git config --global user.email "email@exemplo.com"
-Iniciar repositório
-git init
-git clone <url>
-Fluxo de trabalho
-git status
-git add .
-git commit -m "mensagem"
-Branches
-git branch
-git checkout -b nome-da-branch
-git merge nome-da-branch
-Repositório remoto
-git push origin main
-git pull
-Desfazer alterações
-git reset --hard
-✨ Funcionalidades
-CRUD completo de pacientes
-Integração com banco MySQL
-Estrutura MVC
-API RESTful
-🛠 Troubleshooting
-Erro ao conectar no MySQL
-Verifique usuário e senha
-Confirme se o MySQL está rodando
-Erro no dotnet run
-Execute dotnet restore
-Verifique versão do SDK
-👥 Contribuidores
-Seu Nome
-📄 Licença
-
-Este projeto está sob a licença MIT. Consulte o arquivo LICENSE para mais detalhes.
-
+<p align="center">
+  🚀 API para gerenciamento de pacientes desenvolvida com ASP.NET Core
+</p>
 
 ---
 
-Se quiser, posso melhorar ainda mais esse README incluindo:
-- :contentReference[oaicite:0]{index=0}  
-- :contentReference[oaicite:1]{index=1}  
-- :contentReference[oaicite:2]{index=2}  
-- :contentReference[oaicite:3]{index=3}  
+## 📌 Sobre o Projeto
 
+A **CLINICADOCMAIS API** é uma aplicação desenvolvida em **C# com ASP.NET Core** que permite o gerenciamento completo de pacientes, utilizando arquitetura MVC e banco de dados MySQL.
+
+---
+
+## 📚 Tabela de Conteúdos
+
+* [🚀 Tecnologias](#-tecnologias)
+* [⚙️ Pré-requisitos](#️-pré-requisitos)
+* [📦 Instalação](#-instalação)
+* [🔧 Configuração](#-configuração)
+* [▶️ Execução](#️-execução)
+* [💡 Funcionalidades](#-funcionalidades)
+* [🧰 Comandos Úteis](#-comandos-úteis)
+* [🔄 Git](#-git)
+* [🛠 Troubleshooting](#-troubleshooting)
+* [📄 Licença](#-licença)
+
+---
+
+## 🚀 Tecnologias
+
+* ⚙️ ASP.NET Core 9
+* 🗄️ Entity Framework Core
+* 🐬 MySQL
+* 💻 .NET CLI
+
+---
+
+## ⚙️ Pré-requisitos
+
+Antes de começar, instale:
+
+* [.NET SDK](https://dotnet.microsoft.com/)
+* MySQL Server
+* Git
+
+Verifique instalação:
+
+```bash
+dotnet --version
+dotnet --info
+```
+
+---
+
+## 📦 Instalação
+
+```bash
+# Clonar repositório
+git clone <URL_DO_REPOSITORIO>
+
+# Entrar na pasta
+cd CLINICADOCMAIS
+
+# Restaurar dependências
+dotnet restore
+```
+
+---
+
+## 🔧 Configuração
+
+Edite o arquivo `appsettings.json`:
+
+```json
+"ConnectionStrings": {
+  "DefaultConnection": "Server=localhost;Database=clinicadb;User=root;Password=senha;"
+}
+```
+
+Aplicar migrations:
+
+```bash
+dotnet ef database update
+```
+
+---
+
+## ▶️ Execução
+
+```bash
+dotnet run
+```
+
+📍 A aplicação estará disponível em:
+
+```
+https://localhost:5001
+```
+
+---
+
+## 💡 Funcionalidades
+
+✨ Cadastro de pacientes
+🔍 Consulta de registros
+✏️ Atualização de dados
+❌ Remoção de pacientes
+🌐 API RESTful
+
+---
+
+## 🧰 Comandos Úteis
+
+```bash
+dotnet --help
+dotnet --list-sdks
+dotnet --list-runtimes
+```
+
+---
+
+## 🔄 Git
+
+### Configuração
+
+```bash
+git config --global user.name "Seu Nome"
+git config --global user.email "email@exemplo.com"
+```
+
+### Fluxo básico
+
+```bash
+git status
+git add .
+git commit -m "mensagem"
+```
+
+### Branches
+
+```bash
+git checkout -b nova-branch
+git merge nova-branch
+```
+
+### Remoto
+
+```bash
+git push origin main
+git pull
+```
+
+---
+
+## 🛠 Troubleshooting
+
+❗ Erro no MySQL
+
+* Verifique usuário/senha
+* Confirme se o serviço está ativo
+
+❗ Erro no .NET
+
+* Rode `dotnet restore`
+* Confirme versão do SDK
+
+---
+
+## 📄 Licença
+
+📝 Este projeto está sob a licença MIT.
+
+---
+
+## ⭐ Apoie o Projeto
+
+Se esse projeto te ajudou:
+
+⭐ Dê uma estrela no repositório
+🤝 Contribua com melhorias
+📢 Compartilhe com outros devs
+
+---
