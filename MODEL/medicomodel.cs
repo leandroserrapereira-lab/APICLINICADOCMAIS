@@ -9,6 +9,7 @@
         public string ? email { get; set; }
         public string ?  datanascimento { get; set; }
         public string? prioridade { get; set; }
+        public string ?especialidade { get; set; }
     }
 }
 

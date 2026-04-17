@@ -75,12 +75,22 @@ namespace DocMais.Controllers
             else
             {
                 return $"médico do crm n°{crm} editado com sucesso";
+
             }
+        }
+
+        [HttpGet("buscarmedico")]
+        public string buscarmedico()
+        {
+            return "buscarmedico";
+        }
+ 
+
+                
 
 
-            {
-            }
-        } 
+
+
     }
 }
 
