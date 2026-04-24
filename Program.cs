@@ -1,4 +1,7 @@
 
+using DocMais.DATA;
+using Microsoft.EntityFrameworkCore;
+
 namespace DocMais
 {
     public class Program
@@ -8,10 +11,14 @@ namespace DocMais
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddDbContext<CLINICACONTEX>(options =>
+                options.UseMySql(builder.Configuration.GetConnectionString("ConexaoPadrao"),
+                new MySqlServerVersion(new Version(8, 0, 23))));
+
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
+            
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
@@ -19,7 +26,7 @@ namespace DocMais
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.MapOpenApi();
+                
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }

@@ -1,4 +1,5 @@
-﻿using DocMais.MODEL;
+﻿using DocMais.DATA;
+using DocMais.MODEL;
 using DocMais.SERVICES;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography.X509Certificates;
@@ -10,92 +11,53 @@ namespace DocMais.Controllers
     public class MedicoController : Controller
 
     {
-        public static List<MedicoModel> listamedicos = new List<MedicoModel>();
+        private CLINICACONTEX _Context;
 
 
-        [HttpPost("cadastromédico")]
-        public string cadastromedico([FromBody] MedicoModel cadastromedico)
+        public MedicoController(CLINICACONTEX contex)
         {
-            listamedicos.Add(cadastromedico);
-            return $" Dr.{cadastromedico.nome} cadastro com sucesso";
-
-        }
-        [HttpGet("listamedicos")]
-        public List<MedicoModel> listarmedico()
-        {
-            return listamedicos;
-
+            _Context = contex;
         }
 
-        [HttpPut("editarmedico/{id}")]
-        public string editamedico([FromBody] MedicoModel medicoeditado, string id)
+        [HttpPost("cadastrarmedico/{crm}")]
+        public async Task<IActionResult> buscarmedico(string crm)
         {
-            foreach (var medicomodel in listamedicos)
+            try
             {
-                if (medicomodel.nome == id)
-                {
-                    medicomodel.crm = medicoeditado.crm;
-                    medicomodel.nome = medicoeditado.nome;
-                    medicomodel.telefone = medicoeditado.telefone;
-                    medicomodel.email = medicoeditado.email;
-                    medicomodel.endereco = medicoeditado.endereco;
-                    medicomodel.datanascimento = medicoeditado.datanascimento;
-                    medicomodel.prioridade = medicoeditado.prioridade;
-                    medicomodel.endereco = medicoeditado.endereco;
-                    return $"medicoeditado{medicoeditado.nome}";
-                }
+                MedicoModel? medicoentrado = await _Context.medicos.FindAsync(crm);
+                return Created();
             }
-            return "médico não editado";
-        }
-
-        [HttpDelete("deletarmedico/{id}")]
-        public string deletarmedico(string id)
-        {
-            foreach (var medicomodel in listamedicos)
+            catch (Exception ex)
             {
-                if (medicomodel.crm == id)
-                {
-                    listamedicos.Remove(medicomodel);
-                    return $" deletarmedic: {id} deletado com sucesso";
-                }
-            }
-            return "medico não econtrado";
-
-
-        }
-        [HttpPut("editarmedico")]
-        public string editarmedico([FromBody] MedicoModel medicoeditado, string crm)
-        {
-            MedicoServices medico = new MedicoServices();
-            medico.editarmedico(medicoeditado, crm);
-            if (medicoeditado == null)
-            {
-                return "médico não encotrado";
-            }
-            else
-            {
-                return $"médico do crm n°{crm} editado com sucesso";
-
+                return BadRequest(ex.Message);
             }
         }
-
-        [HttpGet("buscarmedico")]
-        public string buscarmedico()
+        
+        [HttpPut(" editarmedico")]
+        public async Task<IActionResult> editarmedico(string crm)
         {
-            return "buscarmedico";
+            foreach (var medico in _Context.medicos)
+            {
+                    if (medico.crm == crm)
+                    {
+
+                        medico.crm = crm;
+                        medico.nome = medico.nome;
+                        medico.telefone = medico.telefone;
+                        medico.email = medico.email;
+                        medico.datanascimento = medico.datanascimento; 
+                        medico.crm = crm;
+                        return Created();
+
+
+                    } 
+            }
+            return Ok();
+
         }
- 
-
-                
-
-
-
 
     }
 }
-
-
-
 
 
 

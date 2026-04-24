@@ -4,6 +4,7 @@ namespace DocMais.Model
 {
     public class AGENDAMENTOMODEL
     {
+        public string? id {  get; set; }
         public string? nomepaciente {  get; set; }
         public string? nomemedico { get; set; }
         public string? cpfpaciente { get; set; }
