@@ -4,8 +4,9 @@ namespace DocMais.DTO
 {
     public class AGENDAMENTODTO
     {
-        public PacienteModel? paciente { get; set; }
-        public MedicoModel? Medico { get; set; }
+        public string? cpfpaciente { get; set; }
+        public string? id { get; set; }
+        public string? crmMedico { get; set; }
         public DateTime? datahoraagendada { get; set; }
     }
     

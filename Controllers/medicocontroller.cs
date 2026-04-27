@@ -2,6 +2,8 @@
 using DocMais.MODEL;
 using DocMais.SERVICES;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 
 namespace DocMais.Controllers
@@ -32,25 +34,62 @@ namespace DocMais.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        
+
         [HttpPut(" editarmedico")]
         public async Task<IActionResult> editarmedico(string crm)
         {
             foreach (var medico in _Context.medicos)
             {
-                    if (medico.crm == crm)
-                    {
+                if (medico.crm == crm)
+                {
 
-                        medico.crm = crm;
-                        medico.nome = medico.nome;
-                        medico.telefone = medico.telefone;
-                        medico.email = medico.email;
-                        medico.datanascimento = medico.datanascimento; 
-                        medico.crm = crm;
-                        return Created();
+                    medico.crm = crm;
+                    medico.nome = medico.nome;
+                    medico.telefone = medico.telefone;
+                    medico.email = medico.email;
+                    medico.datanascimento = medico.datanascimento;
+                    medico.crm = crm;
+                    return Created();
 
 
-                    } 
+                }
+            }
+            return Ok();
+
+        }
+        [HttpGet(("deletarmedico"))]
+        public async Task<IActionResult> deletarmedico(string cpf)
+        {
+            try
+            {
+                MedicoModel? Medicoencontrado = await _Context.medicos.FindAsync(cpf);
+                if (Medicoencontrado != null)
+                {
+                    _Context.medicos.Remove(Medicoencontrado);
+                    await _Context.SaveChangesAsync();
+                    return NoContent();
+                }
+                else
+                {
+                }
+                throw new Exception($"médico de cpf: {cpf} não existe");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet("listamedicos")]
+        public async Task<IActionResult> listarmedicos(string crm)
+        {
+            try
+            {
+                var listamedico = await _Context.medicos.ToListAsync();
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("erro." + ex.Message);
             }
             return Ok();
 
@@ -58,6 +97,22 @@ namespace DocMais.Controllers
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

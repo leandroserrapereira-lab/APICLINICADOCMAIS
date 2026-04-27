@@ -1,8 +1,11 @@
-﻿using DocMais.DTO;
+﻿using DocMais.DATA;
+using DocMais.DTO;
 using DocMais.Model;
 using DocMais.MODEL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Crmf;
 
 namespace DocMais.Controllers
 {
@@ -11,6 +14,8 @@ namespace DocMais.Controllers
     public class AGENDAMENTOCONTROLLER : ControllerBase
 
     {
+        private CLINICACONTEX _context;
+
         public static List<AGENDAMENTOMODEL> listaagendamento = new List<AGENDAMENTOMODEL>();
         [HttpPost("agendarconsulta")]
         public async Task<IActionResult> AgendarConsulta([FromBody] AGENDAMENTODTO dadosagendamento)
@@ -18,28 +23,28 @@ namespace DocMais.Controllers
             try
             {
                 AGENDAMENTOMODEL agendamento = new AGENDAMENTOMODEL();
-                agendamento.nomepaciente = dadosagendamento.paciente?.nome;
-                agendamento.telefonepaciente = dadosagendamento.paciente?.telefone;
-                agendamento.cpfpaciente = dadosagendamento.paciente?.cpf;
-                agendamento.nomemedico = dadosagendamento.Medico?.nome;
-                agendamento.crmmedico = dadosagendamento.Medico?.crm;
-                agendamento.especialidademedico = dadosagendamento.Medico?.especialidade;
-                agendamento.datahoraagendamento = dadosagendamento.datahoraagendada;
+                agendamento.datahoraagendada = dadosagendamento.datahoraagendada;
+                agendamento.crmmedico = dadosagendamento.crmMedico;
+                agendamento.cpfpaciente = dadosagendamento.cpfpaciente;
+
+                _context.aGENDAMENto.Add(agendamento);
+
 
                 listaagendamento.Add(agendamento);
                 return Created();
 
 
                 return Created();
+            
             }
             catch (Exception ex)
             {
                 return BadRequest("Erro: "+  ex.Message);
             }
-            
 
+           
         }
-        
+            
     }
 }
 

@@ -42,14 +42,15 @@ namespace DocMais.Controllers
             return listaPaciente;
         }
 
-        [HttpGet("buscaPaciente/{cpf}")]
+        [HttpGet("buscaPaciente/{nome}")]
 
-        public async Task<IActionResult> buscarPaciente(string cpf)
+        public async Task<IActionResult> buscarPaciente(string nome)
         {
             try
             {
-                PacienteModel? pacienteencontrado = await _Context.pacientes.FindAsync(cpf);
-                return Ok(pacienteencontrado);
+                _Context.pacientes.Where(p => p.nome == nome).ToList();
+                await _Context.SaveChangesAsync();
+                return Created();
             }
             catch (Exception ex)
             {
